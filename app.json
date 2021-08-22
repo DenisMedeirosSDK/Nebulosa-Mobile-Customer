@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "Nebulosa-Customer",
+    "slug": "Nebulosa-Customer",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "Nebulosa-Customer"
+}
