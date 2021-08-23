@@ -1,14 +1,15 @@
 import React from 'react';
+import { RectButtonProps } from 'react-native-gesture-handler';
 
 import { Container, Title } from './styles';
 
-interface Props {
+interface Props extends RectButtonProps {
   title: string;
 }
 
-export function ButtonLarge({ title }: Props) {
+export function ButtonLarge({ title, ...rest }: Props) {
   return (
-    <Container>
+    <Container {...rest}>
       <Title>{title}</Title>
     </Container>
   );
