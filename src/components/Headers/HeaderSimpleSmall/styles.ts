@@ -12,6 +12,7 @@ export const Container = styled.View`
 
 export const Title = styled.Text`
   color: ${({ theme }) => theme.colors.text_light};
+  font-family: ${({ theme }) => theme.fonts.archivo_600};
   font-size: ${RFValue(25)}px;
   margin-bottom: 20px;
 `;

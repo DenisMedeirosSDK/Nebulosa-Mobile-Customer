@@ -18,6 +18,7 @@ import { ThemeProvider } from 'styled-components/native';
 import theme from './src/Global/styles/theme';
 
 import { Dashboard } from './src/screens/Dashboard';
+import { Category } from './src/screens/Category';
 
 export default function App() {
   const [fontsLoading] = useFonts({
@@ -35,7 +36,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Dashboard />
+      <Category />
     </ThemeProvider>
   );
 }
