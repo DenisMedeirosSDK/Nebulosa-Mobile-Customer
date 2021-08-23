@@ -19,6 +19,8 @@ import theme from './src/Global/styles/theme';
 
 import { Dashboard } from './src/screens/Dashboard';
 import { Category } from './src/screens/Category';
+import { ServicesDetails } from './src/screens/ServicesDetails';
+import { ListServices } from './src/screens/ListServices';
 
 export default function App() {
   const [fontsLoading] = useFonts({
@@ -36,7 +38,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Category />
+      <ListServices />
     </ThemeProvider>
   );
 }
