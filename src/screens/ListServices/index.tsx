@@ -11,16 +11,39 @@ import { api } from '../../services/api';
 import { ServiceDTO } from '../../dtos/ServiceDTO';
 
 import { Container, Content } from './styles';
+import { useNavigation, useRoute } from '@react-navigation/native';
+
+interface Params {
+  id: string;
+}
+
+interface ServicesDTO {
+  id: string;
+  name: string;
+  description: string;
+  price: string;
+  available: boolean;
+  duration: number;
+  categoryId: string;
+  userId: string;
+  createdAt: string;
+  updatedAt: string;
+}
 
 export function ListServices() {
-  const [services, setServices] = useState<ServiceDTO[]>([]);
+  const [services, setServices] = useState<ServicesDTO[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const navigation = useNavigation();
+  const routes = useRoute();
   const theme = useTheme();
-  const id = '672f0b73-f405-415c-851e-c8f95f89dc79';
 
-  function handleOpenServiceDetails(service: ServiceDTO) {
-    console.log('Details', service);
+  const { id } = routes.params as Params;
+
+  function handleOpenServiceDetails(service: ServicesDTO) {
+    navigation.navigate('ServicesDetails', {
+      service,
+    });
   }
 
   useEffect(() => {
