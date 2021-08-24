@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import React from 'react';
 
 import AppLoading from 'expo-app-loading';
@@ -17,10 +18,7 @@ import {
 import { ThemeProvider } from 'styled-components/native';
 import theme from './src/Global/styles/theme';
 
-import { Dashboard } from './src/screens/Dashboard';
-import { Category } from './src/screens/Category';
-import { ServicesDetails } from './src/screens/ServicesDetails';
-import { ListServices } from './src/screens/ListServices';
+import { Routes } from './src/routes';
 
 export default function App() {
   const [fontsLoading] = useFonts({
@@ -38,7 +36,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <ListServices />
+      <Routes />
     </ThemeProvider>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, StatusBar, FlatList, ActivityIndicator } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from 'styled-components';
 
@@ -19,10 +20,13 @@ export function Category() {
   const [categories, setCategories] = useState<CategoryDTO[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const navigation = useNavigation();
   const theme = useTheme();
 
   function handleSearchByCategory(id: string) {
-    console.log(id);
+    navigation.navigate('ListServices', {
+      id,
+    });
   }
 
   useEffect(() => {

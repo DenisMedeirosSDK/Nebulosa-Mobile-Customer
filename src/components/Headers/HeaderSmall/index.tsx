@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { ButtonArrowBack } from '../../Buttons/ButtonArrowBack';
 
@@ -8,10 +9,16 @@ interface Props {
 }
 
 export function HeaderSmall({ title }: Props) {
+  const navigation = useNavigation();
+
+  function handleGoBack() {
+    navigation.goBack();
+  }
+
   return (
     <Container>
       <Content>
-        <ButtonArrowBack />
+        <ButtonArrowBack onPress={handleGoBack} />
         <Wrapper>
           <Title>{title}</Title>
         </Wrapper>
