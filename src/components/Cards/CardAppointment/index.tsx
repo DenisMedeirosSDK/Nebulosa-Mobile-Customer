@@ -1,7 +1,12 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { RectButtonProps } from 'react-native-gesture-handler';
 
 import { AppointmentDTO } from '../../../dtos/AppointmentDTO';
+import {
+  convertISOToDate,
+  convertSecondInMinute,
+} from '../../../utils/convertTimes';
 
 import {
   Container,
@@ -24,10 +29,27 @@ interface Props extends RectButtonProps {
   data: AppointmentDTO;
 }
 
-export function CardLastAppointment({ data, ...rest }: Props) {
+export function CardAppointment({ data, ...rest }: Props) {
+  const navigation = useNavigation();
+
   function handleOpenAppointmentDetails(id: string) {
-    console.log('Details', id);
+    navigation.navigate('AppointmentDetails', {
+      id,
+    });
   }
+
+  const appointmentDate = data.date;
+  const serviceDuration = data.serviceId.duration;
+  const servicePrice = Number(data.serviceId.price);
+
+  const servicePriceFormatted = servicePrice.toLocaleString('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  });
+  const appointmentDateFormatted = convertISOToDate(appointmentDate);
+  const serviceDurationFormatted = convertSecondInMinute(
+    serviceDuration as number
+  );
 
   return (
     <Container {...rest} onPress={() => handleOpenAppointmentDetails(data.id)}>
@@ -39,13 +61,13 @@ export function CardLastAppointment({ data, ...rest }: Props) {
           <Name>{data.customerId.name}</Name>
           <ServiceInfo>
             <Service>{data.serviceId.name}</Service>
-            <Duration>{data.serviceId.duration} min</Duration>
+            <Duration>{serviceDurationFormatted} min</Duration>
           </ServiceInfo>
           <AppointmentInfo>
-            <Appointment>{data.date}</Appointment>
+            <Appointment>{appointmentDateFormatted}</Appointment>
           </AppointmentInfo>
           <Footer>
-            <Price>R$ {data.serviceId.price}</Price>
+            <Price>{servicePriceFormatted}</Price>
             <Status>{data.status}</Status>
           </Footer>
         </Infos>

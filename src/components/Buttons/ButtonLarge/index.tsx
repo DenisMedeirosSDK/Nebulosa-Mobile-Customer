@@ -5,11 +5,12 @@ import { Container, Title } from './styles';
 
 interface Props extends RectButtonProps {
   title: string;
+  color?: string;
 }
 
-export function ButtonLarge({ title, ...rest }: Props) {
+export function ButtonLarge({ title, color, ...rest }: Props) {
   return (
-    <Container {...rest}>
+    <Container {...rest} color={color}>
       <Title>{title}</Title>
     </Container>
   );
