@@ -39,8 +39,8 @@ export function CardAppointment({ data, ...rest }: Props) {
   }
 
   const appointmentDate = data.date;
-  const serviceDuration = data.serviceId.duration;
-  const servicePrice = Number(data.serviceId.price);
+  const serviceDuration = data.service.duration;
+  const servicePrice = Number(data.service.price);
 
   const servicePriceFormatted = servicePrice.toLocaleString('pt-BR', {
     style: 'currency',
@@ -55,12 +55,12 @@ export function CardAppointment({ data, ...rest }: Props) {
     <Container {...rest} onPress={() => handleOpenAppointmentDetails(data.id)}>
       <Content>
         <ImageContainer>
-          <Photo source={{ uri: data.providerId.avatarURL }} />
+          <Photo source={{ uri: data.provider?.avatarURL }} />
         </ImageContainer>
         <Infos>
-          <Name>{data.customerId.name}</Name>
+          <Name>{data.provider?.name}</Name>
           <ServiceInfo>
-            <Service>{data.serviceId.name}</Service>
+            <Service>{data.service.name}</Service>
             <Duration>{serviceDurationFormatted} min</Duration>
           </ServiceInfo>
           <AppointmentInfo>

@@ -3,10 +3,11 @@ import { Platform } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useTheme } from 'styled-components';
 
 import { Dashboard } from '../screens/Dashboard';
 import { Category } from '../screens/Category';
-import { useTheme } from 'styled-components';
+import { History } from '../screens/History';
 
 const Tab = createBottomTabNavigator();
 
@@ -41,7 +42,7 @@ export function TabRoutes() {
           tabBarIcon: ({ size, color }) => (
             <Feather name="search" size={size} color={color} />
           ),
-          tabBarLabel: 'Categoria',
+          tabBarLabel: 'Serviços',
         }}
         component={Category}
       />
@@ -51,9 +52,9 @@ export function TabRoutes() {
           tabBarIcon: ({ size, color }) => (
             <Feather name="calendar" size={size} color={color} />
           ),
-          tabBarLabel: 'Historico',
+          tabBarLabel: 'Histórico',
         }}
-        component={Category}
+        component={History}
       />
       <Tab.Screen
         name="Profile"
