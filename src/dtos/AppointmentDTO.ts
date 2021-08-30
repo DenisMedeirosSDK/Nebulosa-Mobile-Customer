@@ -11,6 +11,7 @@ interface Customer {
 }
 
 interface Service {
+  id?: string;
   name?: string;
   description?: string;
   price?: number;
@@ -23,9 +24,8 @@ interface Service {
 interface AppointmentDTO {
   id: string;
   date: string;
-  serviceId: Service;
-  customerId: Customer;
-  providerId: Provider;
+  service: Service;
+  provider?: Provider;
   status: 'accept' | 'pending' | 'canceled';
 }
 
