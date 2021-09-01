@@ -3,6 +3,7 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
+  StatusBar,
 } from 'react-native';
 import { useNavigation, CommonActions } from '@react-navigation/native';
 
@@ -45,43 +46,50 @@ export function SignIn() {
   }
 
   return (
-    <KeyboardAvoidingView behavior="position" enabled>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <Container>
-          <Header>
-            <Title>Nebulosa</Title>
-            <SubTitle>Sua plataforma de agendamento rápido</SubTitle>
-          </Header>
-          <Form>
-            <InputIcon
-              iconName="mail"
-              placeholder="E-mail"
-              autoCompleteType="email"
-              keyboardType="email-address"
-              autoCapitalize="none"
-              autoCorrect={false}
-              onChangeText={setEmail}
-              value={email}
-            />
-            <Divider12px />
-            <InputPassword
-              iconName="lock"
-              placeholder="Senha"
-              autoCapitalize="none"
-              autoCompleteType="password"
-              autoCorrect={false}
-              onChangeText={setPassword}
-              value={password}
-            />
-          </Form>
-          <ButtonLarge title="Entrar" onPress={handleLogin} />
-          <Footer>
-            <CreateAccountButton onPress={handleCreateNewAccount}>
-              <CreateAccountText>Criar conta</CreateAccountText>
-            </CreateAccountButton>
-          </Footer>
-        </Container>
-      </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+    <>
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor="transparent"
+        translucent
+      />
+      <KeyboardAvoidingView behavior="position" enabled>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <Container>
+            <Header>
+              <Title>Nebulosa</Title>
+              <SubTitle>Sua plataforma de agendamento rápido</SubTitle>
+            </Header>
+            <Form>
+              <InputIcon
+                iconName="mail"
+                placeholder="E-mail"
+                autoCompleteType="email"
+                keyboardType="email-address"
+                autoCapitalize="none"
+                autoCorrect={false}
+                onChangeText={setEmail}
+                value={email}
+              />
+              <Divider12px />
+              <InputPassword
+                iconName="lock"
+                placeholder="Senha"
+                autoCapitalize="none"
+                autoCompleteType="password"
+                autoCorrect={false}
+                onChangeText={setPassword}
+                value={password}
+              />
+            </Form>
+            <ButtonLarge title="Entrar" onPress={handleLogin} />
+            <Footer>
+              <CreateAccountButton onPress={handleCreateNewAccount}>
+                <CreateAccountText>Criar conta</CreateAccountText>
+              </CreateAccountButton>
+            </Footer>
+          </Container>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
+    </>
   );
 }
