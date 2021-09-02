@@ -19,12 +19,7 @@ export function History() {
   useEffect(() => {
     async function loadHistoryAppointment() {
       try {
-        const response = await api.get('appointments', {
-          headers: {
-            authorization:
-              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRlbmlzQGVtYWlsLmNvbSIsImlhdCI6MTYyOTY1ODY1NCwiZXhwIjoxNjMyMjUwNjU0LCJzdWIiOiJhZDk1YzBjNi1hMGFkLTQyNjYtOTk2YS0yMThiMjNiYWQ1NGYifQ.ZaLgWEQKTXIFn9h1__uesvnVPHuxZSmGRnD13nI7ugg',
-          },
-        });
+        const response = await api.get('appointments');
 
         setAppointments(response.data);
         setIsLoading(false);

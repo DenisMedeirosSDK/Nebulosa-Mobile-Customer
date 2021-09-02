@@ -5,11 +5,11 @@ interface User {
   id: string;
   name: string;
   email: string;
-  avatar: string;
 }
 
 interface AuthState {
   token: string;
+  refreshToken: string;
   user: User;
 }
 
@@ -38,11 +38,12 @@ function AuthProvider({ children }: AuthProviderProps) {
       password,
     });
 
-    const { token, user } = respone.data;
+    const { token, refreshToken, user } = respone.data;
+    console.log(respone.data);
 
-    api.defaults.headers.authorization = `Bearer ${token}`;
+    api.defaults.headers.authorization = `Bearer ${refreshToken}`;
 
-    setData({ token, user });
+    setData({ token, refreshToken, user });
   }
 
   return (

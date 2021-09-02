@@ -52,10 +52,6 @@ export function ListServices() {
       try {
         setIsLoading(true);
         const response = await api.get(`services/search`, {
-          headers: {
-            authorization:
-              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRlbmlzQGVtYWlsLmNvbSIsImlhdCI6MTYyOTY1ODY1NCwiZXhwIjoxNjMyMjUwNjU0LCJzdWIiOiJhZDk1YzBjNi1hMGFkLTQyNjYtOTk2YS0yMThiMjNiYWQ1NGYifQ.ZaLgWEQKTXIFn9h1__uesvnVPHuxZSmGRnD13nI7ugg',
-          },
           cancelToken: source.token,
           params: {
             categoryId: id,
