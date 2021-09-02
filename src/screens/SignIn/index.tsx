@@ -4,12 +4,16 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   StatusBar,
+  Alert,
 } from 'react-native';
 import { useNavigation, CommonActions } from '@react-navigation/native';
+import * as Yup from 'yup';
 
 import { ButtonLarge } from '../../components/Buttons/ButtonLarge';
 import { InputIcon } from '../../components/Inputs/InputIcon';
 import { InputPassword } from '../../components/Inputs/InputPassword';
+
+import { useAuth } from '../../hook/auth';
 
 import {
   Container,
@@ -28,13 +32,30 @@ export function SignIn() {
   const [password, setPassword] = useState('');
   const navigation = useNavigation();
 
-  function handleLogin() {
-    navigation.dispatch(
-      CommonActions.navigate({
-        name: 'TabRoutes',
-      })
-    );
-    console.log('Login success');
+  const { signIn } = useAuth();
+
+  async function handleLogin() {
+    try {
+      const schema = Yup.object().shape({
+        email: Yup.string()
+          .required('E-mail obrigatório')
+          .email('Digite um e-mail válido'),
+        password: Yup.string().required('Senha obrigatória').min(6),
+      });
+
+      await schema.validate({ email, password });
+
+      signIn({ email, password });
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        Alert.alert('Opa', error.message);
+      } else {
+        Alert.alert(
+          'Erro na autenticação',
+          'Ocorreu um erro ao fazer login, verifique as credenciais'
+        );
+      }
+    }
   }
 
   function handleCreateNewAccount() {

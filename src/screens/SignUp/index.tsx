@@ -13,6 +13,8 @@ import { ButtonLarge } from '../../components/Buttons/ButtonLarge';
 import { InputIcon } from '../../components/Inputs/InputIcon';
 import { InputPassword } from '../../components/Inputs/InputPassword';
 
+import { api } from '../../services/api';
+
 import {
   Container,
   Header,
@@ -55,11 +57,26 @@ export function SignUp() {
       const data = { name, email, password, passwordConfirm };
 
       await schema.validate(data);
-      navigation.dispatch(
-        CommonActions.navigate({
-          name: 'TabRoutes',
+
+      api
+        .post('/users', {
+          name,
+          email,
+          password,
         })
-      );
+        .then(() => {
+          navigation.dispatch(
+            CommonActions.navigate({
+              name: 'SignIn',
+            })
+          );
+        })
+        .catch(() => {
+          Alert.alert(
+            'Opa',
+            'Não foi possível cadastrar, tente novamente mais tarde'
+          );
+        });
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         Alert.alert('Opa', error.message);
