@@ -90,7 +90,6 @@ function AuthProvider({ children }: AuthProviderProps) {
       if (response.length > 0) {
         const userData = response[0]._raw as unknown as User;
         api.defaults.headers.authorization = `Bearer ${userData.refreshToken}`;
-        console.log(userData.refreshToken);
         setData(userData);
       }
     }
