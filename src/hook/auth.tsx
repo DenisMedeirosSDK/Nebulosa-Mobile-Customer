@@ -19,6 +19,11 @@ interface IUser {
   refreshToken: string;
 }
 
+interface IProfile {
+  avatar?: string;
+  avatarURL?: string;
+}
+
 interface SignInCredentials {
   email: string;
   password: string;
@@ -26,6 +31,7 @@ interface SignInCredentials {
 
 interface AuthContextData {
   user: IUser;
+  profile: IProfile;
   signIn: (credentials: SignInCredentials) => Promise<void>;
   signOut: () => Promise<void>;
 }
@@ -38,6 +44,7 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 function AuthProvider({ children }: AuthProviderProps) {
   const [data, setData] = useState<IUser>({} as IUser);
+  const [profile, setProfile] = useState<IProfile>({} as IProfile);
 
   async function signIn({ email, password }: SignInCredentials) {
     try {
@@ -49,6 +56,9 @@ function AuthProvider({ children }: AuthProviderProps) {
       const { token, refreshToken, user } = respone.data;
 
       api.defaults.headers.authorization = `Bearer ${refreshToken}`;
+
+      const getProfile = await api.get('users');
+      const { avatarURL, avatar } = getProfile.data;
 
       const userCollection = database.get<User>('users');
 
@@ -63,6 +73,7 @@ function AuthProvider({ children }: AuthProviderProps) {
       });
 
       setData({ token, refreshToken, ...user });
+      setProfile({ avatarURL, avatar });
     } catch (error) {
       throw new Error(error);
     }
@@ -100,6 +111,7 @@ function AuthProvider({ children }: AuthProviderProps) {
     <AuthContext.Provider
       value={{
         user: data,
+        profile,
         signIn,
         signOut,
       }}

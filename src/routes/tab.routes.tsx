@@ -8,6 +8,7 @@ import { useTheme } from 'styled-components';
 import { Dashboard } from '../screens/Dashboard';
 import { Category } from '../screens/Category';
 import { History } from '../screens/History';
+import { Profile } from '../screens/Profile';
 
 const Tab = createBottomTabNavigator();
 
@@ -64,7 +65,7 @@ export function TabRoutes() {
           ),
           tabBarLabel: 'Perfil',
         }}
-        component={Category}
+        component={Profile}
       />
     </Tab.Navigator>
   );
