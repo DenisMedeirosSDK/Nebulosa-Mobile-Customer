@@ -7,6 +7,7 @@ import { ServicesDetails } from '../screens/ServicesDetails';
 import { AppointmentDetails } from '../screens/AppointmentDetails';
 
 import { TabRoutes } from './tab.routes';
+import { PasswordSafety } from '../screens/PasswordSafety';
 
 const Stack = createStackNavigator();
 
@@ -17,6 +18,7 @@ export function StackRoutes() {
       <Stack.Screen name="ListServices" component={ListServices} />
       <Stack.Screen name="ServicesDetails" component={ServicesDetails} />
       <Stack.Screen name="AppointmentDetails" component={AppointmentDetails} />
+      <Stack.Screen name="PasswordSafety" component={PasswordSafety} />
     </Stack.Navigator>
   );
 }
