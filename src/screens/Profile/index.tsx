@@ -51,7 +51,6 @@ export function Profile() {
         allowsEditing: true,
         aspect: [4, 4],
         quality: 1,
-        base64: true,
         allowsMultipleSelection: false,
       });
 
@@ -60,22 +59,21 @@ export function Profile() {
         setAvatar(imageSelected.uri);
       }
 
-      const data = new FormData();
+      const { uri: avatar } = imageSelected;
 
-      // const myBlob = new Blob([`${imageSelected.uri}`], { type: 'image/jpeg' });
-
-      data.append(
-        'avatar',
-        {
-          type: 'image/jpeg',
-          uri: imageSelected.uri,
-        },
-        `${user.id}.jpg`
+      const getFileName = imageSelected.uri.substr(
+        imageSelected.uri.lastIndexOf('/') + 1
       );
 
-      await api.patch('/users/avatar', data).then(response => {
-        console.log(response.data);
-      });
+      const data = new FormData();
+
+      data.append('avatar', {
+        name: `${getFileName}`,
+        type: 'image/jpeg',
+        uri: avatar,
+      } as any);
+
+      await api.patch('/users/avatar', data);
 
       setAvatar(imageSelected.uri);
     } catch (error) {
